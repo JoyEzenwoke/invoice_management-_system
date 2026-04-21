@@ -1,8 +1,8 @@
 # Invoice Management App
 
-## 🚀 Live Demo
+##  Live Demo
 
-👉 https://your-vercel-link.vercel.app
+👉 https://invoice-management-system-qope.vercel.app/
 
 ## 📂 GitHub Repository
 
@@ -161,13 +161,3 @@ npm run dev
 
 ---
 
-## ✅ Submission Checklist
-
-* ✔ CRUD functionality implemented
-* ✔ Form validation applied
-* ✔ Status logic enforced
-* ✔ Filtering working
-* ✔ Dark mode implemented
-* ✔ Responsive design complete
-* ✔ No console errors
-* ✔ Accessibility considered
