@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* GLOBAL BODY THEME */
+body {
+  @apply bg-gray-100 text-black;
+}
+
+.dark body {
+  @apply bg-gray-900 text-white;
+}
+
+/* GLOBAL INPUTS */
+input,
+select,
+textarea {
+  @apply bg-white text-black border border-gray-300 rounded;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+  @apply bg-gray-700 text-white border-gray-600;
+}

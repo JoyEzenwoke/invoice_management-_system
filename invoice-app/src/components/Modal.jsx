@@ -1,14 +1,18 @@
 const Modal = ({ children, close }) => {
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-
-      {/* MODAL CONTENT */}
-      <div className="bg-white dark:bg-gray-800 text-black dark:text-white p-4 rounded-lg relative w-full max-w-md mx-4 shadow-lg">
-
+    <div
+      className="fixed inset-0 backdrop-blur-sm bg-black/30 flex items-center justify-center z-50"
+      onClick={close}
+    >
+      <div
+        // className="bg-white dark:bg-gray-800 p-4 rounded-xl relative shadow-lg w-full max-w-lg"
+        className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl w-full max-w-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* CLOSE BUTTON */}
         <button
           onClick={close}
-          className="absolute top-2 right-3 text-xl text-gray-500 hover:text-red-500"
+          className="absolute top-3 right-3 text-gray-500 hover:text-black dark:hover:text-white text-lg"
         >
           ✕
         </button>
