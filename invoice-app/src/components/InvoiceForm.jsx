@@ -12,7 +12,6 @@ const InvoiceForm = ({ closeModal, existingInvoice }) => {
     existingInvoice?.total || ""
   );
 
-  // 🔥 ERROR STATES
   const [errors, setErrors] = useState({});
 
   const validate = () => {
@@ -31,7 +30,7 @@ const InvoiceForm = ({ closeModal, existingInvoice }) => {
     if (!total) {
       newErrors.total = "Total is required";
     } else if (Number(total) <= 0) {
-      newErrors.total = "Must be greater than 0";
+      newErrors.total = "Total must be greater than 0";
     }
 
     setErrors(newErrors);
@@ -73,24 +72,25 @@ const InvoiceForm = ({ closeModal, existingInvoice }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg space-y-4 w-[320px] shadow">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg space-y-4 w-full max-w-md mx-auto shadow">
 
+      {/* TITLE */}
       <h2 className="text-xl font-bold text-black dark:text-white">
         {existingInvoice ? "Edit Invoice" : "New Invoice"}
       </h2>
 
       {/* CLIENT NAME */}
       <div>
-        <label className="block text-sm text-gray-600 dark:text-gray-300">
+        <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1">
           Client Name
         </label>
         <input
           type="text"
           value={clientName}
           onChange={(e) => setClientName(e.target.value)}
-          className={`w-full border p-2 rounded mt-1 outline-none 
-            ${errors.clientName ? "border-red-500" : "border-gray-300"}
-            dark:bg-gray-700 dark:text-white`}
+          className={`w-full border p-2 rounded outline-none dark:bg-gray-700 dark:text-white ${
+            errors.clientName ? "border-red-500" : "border-gray-300"
+          }`}
         />
         {errors.clientName && (
           <p className="text-red-500 text-xs mt-1">
@@ -101,16 +101,16 @@ const InvoiceForm = ({ closeModal, existingInvoice }) => {
 
       {/* EMAIL */}
       <div>
-        <label className="block text-sm text-gray-600 dark:text-gray-300">
+        <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1">
           Client Email
         </label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className={`w-full border p-2 rounded mt-1 outline-none 
-            ${errors.email ? "border-red-500" : "border-gray-300"}
-            dark:bg-gray-700 dark:text-white`}
+          className={`w-full border p-2 rounded outline-none dark:bg-gray-700 dark:text-white ${
+            errors.email ? "border-red-500" : "border-gray-300"
+          }`}
         />
         {errors.email && (
           <p className="text-red-500 text-xs mt-1">
@@ -121,16 +121,16 @@ const InvoiceForm = ({ closeModal, existingInvoice }) => {
 
       {/* TOTAL */}
       <div>
-        <label className="block text-sm text-gray-600 dark:text-gray-300">
+        <label className="block text-sm text-gray-600 dark:text-gray-300 mb-1">
           Total
         </label>
         <input
           type="number"
           value={total}
           onChange={(e) => setTotal(e.target.value)}
-          className={`w-full border p-2 rounded mt-1 outline-none 
-            ${errors.total ? "border-red-500" : "border-gray-300"}
-            dark:bg-gray-700 dark:text-white`}
+          className={`w-full border p-2 rounded outline-none dark:bg-gray-700 dark:text-white ${
+            errors.total ? "border-red-500" : "border-gray-300"
+          }`}
         />
         {errors.total && (
           <p className="text-red-500 text-xs mt-1">
@@ -139,21 +139,21 @@ const InvoiceForm = ({ closeModal, existingInvoice }) => {
         )}
       </div>
 
-      {/* BUTTONS */}
-      <div className="flex gap-2 flex-wrap pt-2">
+      {/* BUTTONS (FIXED MOBILE LAYOUT) */}
+      <div className="flex flex-col sm:flex-row gap-2 pt-2">
 
         {!existingInvoice && (
           <>
             <button
               onClick={() => handleSubmit("draft")}
-              className="bg-gray-500 hover:bg-gray-600 text-white px-3 py-2 rounded transition"
+              className="bg-gray-500 hover:bg-gray-600 text-white px-3 py-2 rounded transition w-full"
             >
               Save Draft
             </button>
 
             <button
               onClick={() => handleSubmit("pending")}
-              className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded transition"
+              className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded transition w-full"
             >
               Save & Send
             </button>
@@ -163,7 +163,7 @@ const InvoiceForm = ({ closeModal, existingInvoice }) => {
         {existingInvoice && (
           <button
             onClick={() => handleSubmit(existingInvoice.status)}
-            className="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded transition"
+            className="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded transition w-full"
           >
             Update
           </button>
