@@ -1,163 +1,165 @@
+
 # Invoice Management App
 
 ##  Live Demo
+https://invoice-management-system-qope.vercel.app/
 
-👉 https://invoice-management-system-qope.vercel.app/
-
-## 📂 GitHub Repository
-
-👉 https://github.com/JoyEzenwoke/invoice_management-_system
+##  GitHub Repository
+https://github.com/JoyEzenwoke/invoice_management-_system
 
 ---
 
-## 📌 Overview
+##  Overview
 
-This is a fully functional Invoice Management Application built with React and Tailwind CSS.
+This is a fully functional **Invoice Management Application** built with **React (Vite) and Tailwind CSS**, based on a Figma design.
 
-The application allows users to manage invoices with full CRUD functionality, apply filters, toggle themes, and interact with a responsive interface based on a Figma design.
+The app allows users to create, manage, and track invoices with a clean UI, theme support, and persistent local storage.
 
----
-
-## 🎯 Core Features
-
-### ✅ CRUD Functionality
-
-* Create new invoices
-* View all invoices
-* View detailed invoice information
-* Edit existing invoices
-* Delete invoices (with confirmation modal)
-
-### ✅ Invoice Status Flow
-
-* Draft
-* Pending
-* Paid
-
-Rules implemented:
-
-* Draft invoices can be edited
-* Pending invoices can be marked as paid
-* Paid invoices cannot be edited
+All monetary values are displayed in **USD ($)**.
 
 ---
 
-### ✅ Filtering
+##  Core Features
 
+### Invoice Management (CRUD)
+- Create new invoices
+- View invoice list
+- View detailed invoice receipt page
+- Edit invoices 
+- Delete invoices with confirmation modal
+
+---
+
+###  Invoice Status Flow
+Invoices follow this lifecycle:
+
+- Draft
+- Pending
+- Paid
+
+### Rules:
+- Draft → can be edited or sent
+- Pending → can be marked as Paid
+- Paid → cannot be edited
+
+---
+
+###  Currency Handling
+- All totals are displayed in **USD ($)**
+- Item-based calculation system included
+- Automatic total updates
+
+---
+
+###  Filtering System
 Users can filter invoices by:
-
-* All
-* Draft
-* Pending
-* Paid
-
-The list updates instantly based on selected filters.
+- All
+- Draft
+- Pending
+- Paid
 
 ---
 
-### ✅ Theme Toggle
-
-* Light and Dark mode supported
-* Theme preference saved using LocalStorage
-* Applies globally across the app
-
----
-
-### ✅ Data Persistence
-
-* All invoice data is stored in LocalStorage
-* Data remains after page refresh
+###  Theme Support
+- Light / Dark mode toggle
+- Theme stored in LocalStorage
+- Applies globally across all pages
 
 ---
 
-### ✅ Responsive Design
-
-* Mobile-first layout
-* Tablet and desktop support
-* Flexible components with Tailwind CSS
-
----
-
-### ✅ Interactive UI
-
-* Hover states on buttons and cards
-* Clickable invoice cards
-* Modal for form interaction
+###  Data Persistence
+- Uses LocalStorage for saving invoices
+- Data persists after refresh
+- No backend required
 
 ---
 
-## 🏗 Architecture
-
-The application follows a component-based architecture:
-
-* **Pages**
-
-  * Home (Invoice List)
-  * InvoiceDetail
-
-* **Components**
-
-  * InvoiceCard
-  * InvoiceForm
-  * Modal
-
-* **Context**
-
-  * ThemeContext (handles dark/light mode)
-
-* **Utils**
-
-  * storage.js (handles LocalStorage operations)
+###  Responsive Design
+- Fully mobile responsive
+- Tablet and desktop optimized
+- Modal-based form layout for better UX
 
 ---
 
-## 🛠 Tech Stack
+###  Invoice Receipt View
+Each invoice includes:
+- Client details
+- Sender details
+- Invoice date
+- Payment terms
+- Item breakdown
+- Total amount due
 
-* React (Vite)
-* Tailwind CSS
-* React Router
-* LocalStorage
+---
+
+###  Delete Confirmation System
+- Custom modal confirmation
+- Cancel or Delete option
+- Prevents accidental deletion
+
+---
+
+### ✔️ Mark as Paid
+- Pending invoices can be marked as paid instantly
+- Updates UI without page reload
+
+---
+
+##  Architecture
+
+The project is structured using a component-based architecture:
+
+### Pages
+- Home (Invoice List)
+- InvoiceDetail
+
+### Components
+- InvoiceCard
+- InvoiceForm
+- Modal
+- Theme Toggle Component
+
+### Context
+- ThemeContext (Dark / Light mode handling)
+
+### Utilities
+- storage.js (LocalStorage operations)
+- format.js (Currency formatting - USD)
+
+---
+
+## Tech Stack
+
+- React (Vite)
+- Tailwind CSS
+- React Router DOM
+- LocalStorage API
+- JavaScript (ES6+)
 
 ---
 
 ## ⚖️ Trade-offs
 
-* Used LocalStorage instead of a backend for simplicity and speed
-* No authentication system implemented
-* Minimal animations to focus on core functionality
+- Used LocalStorage instead of backend for simplicity
+- No authentication system implemented
+- Minimal animations to focus on functionality
+- Currency fixed to USD (no multi-currency support)
 
 ---
 
 ## ♿ Accessibility
 
-* Semantic HTML used throughout
-* Buttons use proper `<button>` elements
-* Form inputs include labels
-* Good color contrast for readability
-* Basic keyboard navigation supported
+- Semantic HTML used
+- Proper button elements
+- Form validation included
+- Clear error messages
+- Good contrast in dark/light modes
 
 ---
 
 ## 🔧 Setup Instructions
 
-Clone the repository:
-
+### Clone repository
 ```bash
 git clone https://github.com/JoyEzenwoke/invoice_management-_system.git
 cd invoice_management-_system/invoice-app
-npm install
-npm run dev
-```
-
----
-
-## 🚀 Future Improvements
-
-* Add backend (Node.js / Express / Database)
-* User authentication system
-* Export invoices as PDF
-* Improved animations and UI polish
-* Advanced filtering and search
-
----
-
