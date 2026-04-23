@@ -1,46 +1,54 @@
 import { Link } from "react-router-dom";
-import { formatCurrency } from "../utils/format";
 
 const InvoiceCard = ({ invoice }) => {
-  const statusStyles = {
-    paid: "bg-green-100 text-green-700",
-    pending: "bg-yellow-100 text-yellow-700",
-    draft: "bg-gray-200 text-gray-700",
-  };
-
   return (
     <Link
       to={`/invoice/${invoice.id}`}
-      className="block p-4 rounded-lg shadow bg-white dark:bg-gray-800 hover:shadow-lg transition border border-transparent hover:border-purple-500"
+      className="block bg-white dark:bg-[#1E2139] rounded-lg shadow hover:shadow-md transition"
     >
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+      <div className="grid grid-cols-6 items-center gap-4 p-4 text-sm">
+
+        {/* ID */}
         <p className="font-bold text-black dark:text-white">
           #{invoice.id}
         </p>
 
-        <p className="text-gray-500 text-sm">
+        {/* DATE */}
+        <p className="text-gray-500 dark:text-gray-300">
           {invoice.date}
         </p>
-      </div>
 
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-2 gap-2">
-        <p className="text-gray-700 dark:text-gray-200">
+        {/* CLIENT */}
+        <p className="text-gray-700 dark:text-gray-200 truncate">
           {invoice.clientName}
         </p>
 
-        <p className="font-bold text-black dark:text-white">
-          {formatCurrency(invoice.total)}
+        {/* AMOUNT */}
+        <p className="font-bold text-black dark:text-white text-right">
+          ${Number(invoice.total).toFixed(2)}
         </p>
-      </div>
 
-      <div className="mt-3">
-        <span
-          className={`px-3 py-1 text-xs font-semibold rounded-full capitalize ${
-            statusStyles[invoice.status]
-          }`}
-        >
-          {invoice.status}
-        </span>
+        {/* STATUS */}
+        <div className="flex justify-center">
+          <span
+            className={`px-3 py-1 rounded text-xs font-semibold
+              ${
+                invoice.status === "paid"
+                  ? "bg-green-100 text-green-700"
+                  : invoice.status === "pending"
+                  ? "bg-orange-100 text-orange-700"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+          >
+            {invoice.status}
+          </span>
+        </div>
+
+        {/* ARROW */}
+        <div className="text-right text-gray-400">
+          →
+        </div>
+
       </div>
     </Link>
   );

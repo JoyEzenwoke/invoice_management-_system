@@ -3,109 +3,97 @@ import InvoiceCard from "../components/InvoiceCard";
 import InvoiceForm from "../components/InvoiceForm";
 import Modal from "../components/Modal";
 import { getInvoices } from "../utils/storage";
-import { useTheme } from "../context/ThemeContext";
 
 const Home = () => {
   const [invoices, setInvoices] = useState([]);
   const [open, setOpen] = useState(false);
   const [filter, setFilter] = useState("all");
 
-  const { theme, toggleTheme } = useTheme();
-
   const loadInvoices = () => {
-    const data = getInvoices();
-    setInvoices(data);
+    setInvoices(getInvoices());
   };
 
   useEffect(() => {
     loadInvoices();
   }, []);
 
-  // FILTER LOGIC
   const filteredInvoices =
     filter === "all"
       ? invoices
       : invoices.filter((inv) => inv.status === filter);
 
   return (
-    <div className="p-4 md:p-6 space-y-4 bg-white dark:bg-gray-900 min-h-screen">
+    <div className="bg-gray-100 dark:bg-[#141625] min-h-screen p-4 sm:p-8">
 
-      {/* HEADER */}
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
+      {/* CENTER CONTAINER (IMPORTANT FIX) */}
+      <div className="max-w-5xl mx-auto space-y-6">
 
-        <h1 className="text-xl md:text-2xl font-bold text-black dark:text-white">
-          Invoices
-        </h1>
+        {/* HEADER */}
+        <div className="flex justify-between items-center">
 
-        <div className="flex flex-col sm:flex-row gap-2">
+          <div>
+            <h1 className="text-2xl font-bold text-black dark:text-white">
+              Invoices
+            </h1>
+            <p className="text-gray-500 text-sm">
+              {invoices.length} total invoices
+            </p>
+          </div>
 
-          {/* DARK MODE */}
-          <button
-            onClick={toggleTheme}
-            className="px-3 py-2 border rounded text-sm"
-          >
-            {theme === "light" ? "🌙 Dark" : "☀️ Light"}
-          </button>
-
-          {/* NEW INVOICE */}
           <button
             onClick={() => setOpen(true)}
-            className="bg-purple-600 text-white px-4 py-2 rounded"
+            className="bg-purple-600 text-white px-4 py-2 rounded-full"
           >
             + New Invoice
           </button>
 
         </div>
-      </div>
 
-      {/* FILTER */}
-      <div className="flex flex-wrap gap-2">
+        {/* FILTER */}
+        <div className="flex gap-2 flex-wrap">
 
-        {["all", "draft", "pending", "paid"].map((type) => (
-          <button
-            key={type}
-            onClick={() => setFilter(type)}
-            className={`px-3 py-2 text-sm rounded border transition
-              ${
+          {["all", "draft", "pending", "paid"].map((type) => (
+            <button
+              key={type}
+              onClick={() => setFilter(type)}
+              className={`px-3 py-1 rounded text-sm ${
                 filter === type
-                  ? "bg-purple-600 text-white border-purple-600"
-                  : "bg-white dark:bg-gray-800 dark:text-white border-gray-300"
-              }
-            `}
-          >
-            {type.toUpperCase()}
-          </button>
-        ))}
+                  ? "bg-purple-600 text-white"
+                  : "bg-white dark:bg-gray-800 text-black dark:text-white"
+              }`}
+            >
+              {type.toUpperCase()}
+            </button>
+          ))}
 
-      </div>
+        </div>
 
-      {/* LIST */}
-      <div className="grid gap-3">
+        {/* LIST */}
+        <div className="space-y-4">
 
-        {filteredInvoices.length === 0 ? (
-          <p className="text-gray-500 dark:text-gray-300">
-            No invoices found
-          </p>
-        ) : (
-          filteredInvoices.map((inv) => (
-            <InvoiceCard key={inv.id} invoice={inv} />
-          ))
+          {filteredInvoices.length === 0 ? (
+            <p className="text-gray-500">No invoices found</p>
+          ) : (
+            filteredInvoices.map((inv) => (
+              <InvoiceCard key={inv.id} invoice={inv} />
+            ))
+          )}
+
+        </div>
+
+        {/* MODAL */}
+        {open && (
+          <Modal close={() => setOpen(false)}>
+            <InvoiceForm
+              closeModal={() => {
+                setOpen(false);
+                loadInvoices();
+              }}
+            />
+          </Modal>
         )}
 
       </div>
-
-      {/* MODAL */}
-      {open && (
-        <Modal close={() => setOpen(false)}>
-          <InvoiceForm
-            closeModal={() => {
-              setOpen(false);
-              loadInvoices();
-            }}
-          />
-        </Modal>
-      )}
-
     </div>
   );
 };
