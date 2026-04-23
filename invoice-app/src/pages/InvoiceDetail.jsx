@@ -29,15 +29,15 @@ const InvoiceDetail = () => {
 
   // ✅ FIXED MARK AS PAID (NO RELOAD)
   const markAsPaid = () => {
-    const updated = invoices.map((inv) =>
-      inv.id === id ? { ...inv, status: "paid" } : inv
-    );
+  const updated = invoices.map((inv) =>
+    inv.id === id ? { ...inv, status: "paid" } : inv
+  );
 
-    saveInvoices(updated);
+  saveInvoices(updated);
 
-    // trigger re-render instead of reload
-    setRefresh(!refresh);
-  };
+  // refresh UI after update
+  window.location.reload();
+};
 
   const total = invoice.total || 0;
 
