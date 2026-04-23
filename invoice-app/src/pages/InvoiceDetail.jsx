@@ -9,7 +9,8 @@ const InvoiceDetail = () => {
   const navigate = useNavigate();
 
   const [openEdit, setOpenEdit] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false); // ✅ FIXED HERE
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [refresh, setRefresh] = useState(false); // ✅ ADDED
 
   const invoices = getInvoices();
   const invoice = invoices.find((inv) => inv.id === id);
@@ -26,14 +27,16 @@ const InvoiceDetail = () => {
     navigate("/");
   };
 
-  // MARK AS PAID
+  // ✅ FIXED MARK AS PAID (NO RELOAD)
   const markAsPaid = () => {
     const updated = invoices.map((inv) =>
       inv.id === id ? { ...inv, status: "paid" } : inv
     );
 
     saveInvoices(updated);
-    window.location.reload();
+
+    // trigger re-render instead of reload
+    setRefresh(!refresh);
   };
 
   const total = invoice.total || 0;
